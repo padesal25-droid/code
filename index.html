@@ -8,151 +8,149 @@
 <style>
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #ffd6e0, #ffeaf4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    font-family: -apple-system, sans-serif;
+    background: linear-gradient(135deg, #ffd6e0, #fff5f8);
+    overflow: hidden;
+}
+
+/* Floating petals */
+.petal {
+    position: fixed;
+    top: -10px;
+    font-size: 18px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+    }
 }
 
 /* Card */
 .container {
+    position: relative;
+    z-index: 2;
+    width: 320px;
+    margin: 80px auto;
     background: #fff0f5;
     padding: 20px;
     border-radius: 25px;
-    width: 320px;
     text-align: center;
-    box-shadow: 0 10px 25px rgba(255, 105, 180, 0.3);
+    box-shadow: 0 10px 30px rgba(255,105,180,0.3);
 }
 
 /* Image */
 .container img {
     width: 100%;
     border-radius: 20px;
-    margin-bottom: 10px;
 }
 
 /* Title */
 h1 {
     color: #ff69b4;
-    margin: 10px 0;
 }
 
-/* Text */
-p {
+/* Chat bubble */
+.bubble {
+    background: #ff85a2;
+    color: white;
+    padding: 10px;
+    border-radius: 15px;
+    margin-top: 10px;
+    text-align: left;
     font-size: 14px;
-    color: #555;
+}
+
+/* Counter */
+.counter {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #777;
 }
 
 /* Button */
 button {
-    background: #ff85a2;
-    border: none;
+    margin-top: 10px;
     padding: 10px 15px;
+    border: none;
     border-radius: 20px;
+    background: #ff69b4;
     color: white;
-    margin-top: 10px;
     cursor: pointer;
-    transition: 0.3s;
 }
 
-button:hover {
-    background: #ff5c8a;
+/* Fade animation */
+.fade {
+    opacity: 0;
+    animation: fadeIn 2s forwards;
 }
 
-/* Hidden message */
-.hidden {
-    display: none;
-    margin-top: 10px;
-    font-size: 14px;
-}
-
-/* Hearts floating */
-.heart {
-    position: fixed;
-    bottom: -10px;
-    font-size: 20px;
-    animation: float 4s linear infinite;
-}
-
-@keyframes float {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(-100vh); opacity: 0; }
-}
-
-/* Gallery */
-.gallery img {
-    width: 70px;
-    border-radius: 10px;
-    margin: 5px;
-}
-
-/* Footer */
-footer {
-    margin-top: 10px;
-    font-size: 12px;
-    color: #999;
+@keyframes fadeIn {
+    to { opacity: 1; }
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="container fade">
 
-    <!-- MAIN PHOTO -->
-    <img src="pic1.jpg" alt="My Love">
+    <!-- IMAGE -->
+    <img src="pic1.jpg">
 
     <h1>Hi Baby 🌸</h1>
 
-    <p>
-        Ikaw yung pinaka maganda kong nangyari 💖  
-        Thank you for loving me kahit makulit ako minsan 🥺
-    </p>
-
-    <!-- BUTTON -->
-    <button onclick="showLove()">Click me 💕</button>
-
-    <!-- SECRET MESSAGE -->
-    <div id="message" class="hidden">
-        I love you so much ❤️  
-        Ikaw at ikaw pa rin pipiliin ko araw-araw 💖
+    <!-- CHAT STYLE MESSAGE -->
+    <div class="bubble">
+        Good morning baby 💖  
+        Just a reminder na ikaw yung pinaka favorite kong tao 🥺
     </div>
 
-    <!-- GALLERY -->
-    <div class="gallery">
-        <img src="pic1.jpg">
-        <img src="pic2.jpg">
-        <img src="pic3.jpg">
+    <div class="bubble" style="background:#ffc1d3; color:#333;">
+        Thank you for staying kahit minsan makulit ako 😭❤️
     </div>
 
-    <!-- MUSIC BUTTON -->
+    <!-- DAYS COUNTER -->
+    <div class="counter" id="days"></div>
+
+    <!-- MUSIC -->
     <button onclick="playMusic()">Play Music 🎵</button>
 
     <audio id="bgmusic" loop>
         <source src="music.mp3" type="audio/mpeg">
     </audio>
 
-    <footer>Made with love 💌</footer>
-
 </div>
 
 <script>
-function showLove() {
-    document.getElementById("message").style.display = "block";
+/* PETALS */
+function createPetal() {
+    let petal = document.createElement("div");
+    petal.innerHTML = "🌸";
+    petal.classList.add("petal");
 
-    for (let i = 0; i < 10; i++) {
-        let heart = document.createElement("div");
-        heart.innerHTML = "💖";
-        heart.classList.add("heart");
-        heart.style.left = Math.random() * 100 + "vw";
-        document.body.appendChild(heart);
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.animationDuration = (3 + Math.random() * 5) + "s";
 
-        setTimeout(() => heart.remove(), 4000);
-    }
+    document.body.appendChild(petal);
+
+    setTimeout(() => petal.remove(), 8000);
 }
 
+setInterval(createPetal, 300);
+
+/* DAYS COUNTER */
+let startDate = new Date("2023-01-01"); // CHANGE THIS
+let today = new Date();
+let diff = today - startDate;
+let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+document.getElementById("days").innerHTML =
+    "Together for " + days + " days 💖";
+
+/* MUSIC */
 function playMusic() {
     document.getElementById("bgmusic").play();
 }

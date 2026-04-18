@@ -1,85 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Love ❤️</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Love ❤️</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #ff758c, #ff7eb3);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+<style>
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #0f0f0f;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
 
-        .card {
-            background: white;
-            border-radius: 25px;
-            padding: 25px;
-            width: 320px;
-            text-align: center;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-        }
+/* Card */
+.container {
+    width: 90%;
+    max-width: 350px;
+    background: #1c1c1e;
+    border-radius: 25px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
 
-        .card img {
-            width: 100%;
-            border-radius: 20px;
-            margin-bottom: 15px;
-        }
+/* Image */
+.container img {
+    width: 100%;
+    border-radius: 20px;
+}
 
-        h1 {
-            margin: 10px 0;
-            color: #ff4b5c;
-        }
+/* Title */
+h1 {
+    color: #ff4b5c;
+}
 
-        p {
-            color: #444;
-            font-size: 15px;
-        }
+/* Button */
+button {
+    background: #ff4b5c;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 20px;
+    color: white;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
 
-        .heart {
-            font-size: 28px;
-            animation: pulse 1s infinite;
-        }
+button:hover {
+    background: #ff2e44;
+}
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.3); }
-            100% { transform: scale(1); }
-        }
+/* Hidden message */
+.hidden {
+    display: none;
+    margin-top: 15px;
+    font-size: 14px;
+}
 
-        footer {
-            margin-top: 15px;
-            font-size: 12px;
-            color: #888;
-        }
-    </style>
+/* Hearts animation */
+.heart {
+    position: fixed;
+    bottom: -10px;
+    font-size: 20px;
+    animation: float 4s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+.section {
+    margin-top: 20px;
+    text-align: left;
+    font-size: 14px;
+    color: #ccc;
+}
+</style>
+
 </head>
 <body>
 
-    <div class="card">
-        <!-- Replace with your actual image -->
-        <img src="your-photo.jpg" alt="My Love">
+<div class="container">
 
-        <h1>Hi Baby ❤️</h1>
+    <!-- Replace this -->
+    <img src="your-photo.jpg" alt="My Love">
 
-        <p>
-            Thank you for being part of my life.  
-            Kahit minsan makulit ako, ikaw pa rin yung pipiliin ko araw-araw.
-        </p>
+    <h1>Hi Baby ❤️</h1>
 
-        <p>
-            I promise to love you, respect you, and make you smile kahit bad day ka 😊
-        </p>
+    <p>
+        Kahit anong mangyari, ikaw pa rin pipiliin ko araw-araw.
+    </p>
 
-        <div class="heart">❤️</div>
+    <!-- Button -->
+    <button onclick="showLove()">Click me 💖</button>
 
-        <footer>Made with love by Me 💌</footer>
+    <!-- Hidden message -->
+    <div id="message" class="hidden">
+        I love you so much ❤️  
+        Thank you for staying kahit mahirap ako mahalin minsan 🥺
     </div>
+
+    <!-- Memories -->
+    <div class="section">
+        <h3>💌 Memories</h3>
+        <p>• First chat natin 😄</p>
+        <p>• First date natin 🥺</p>
+        <p>• Lahat ng moments na kasama kita ❤️</p>
+    </div>
+
+</div>
+
+<script>
+function showLove() {
+    document.getElementById("message").style.display = "block";
+
+    // create floating hearts
+    for (let i = 0; i < 10; i++) {
+        let heart = document.createElement("div");
+        heart.innerHTML = "❤️";
+        heart.classList.add("heart");
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (15 + Math.random() * 20) + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 4000);
+    }
+}
+</script>
 
 </body>
 </html>

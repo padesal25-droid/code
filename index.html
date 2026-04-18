@@ -3,158 +3,160 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My  ❤️</title>
+<title>For My Love 🌸</title>
 
 <style>
 body {
     margin: 0;
-    font-family: -apple-system, sans-serif;
-    background: #0f0f0f;
-    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ffd6e0, #ffeaf4);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
-/* Login Screen */
-#lockScreen {
-    text-align: center;
-}
-
-input {
-    padding: 10px;
-    border-radius: 10px;
-    border: none;
-    margin-top: 10px;
-}
-
-button {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 10px;
-    background: #ff4b5c;
-    color: white;
-    cursor: pointer;
-}
-
-/* Main Card */
+/* Card */
 .container {
-    display: none;
-    width: 90%;
-    max-width: 350px;
-    background: #1c1c1e;
-    border-radius: 25px;
+    background: #fff0f5;
     padding: 20px;
+    border-radius: 25px;
+    width: 320px;
     text-align: center;
+    box-shadow: 0 10px 25px rgba(255, 105, 180, 0.3);
 }
 
-/* Slideshow */
-.slideshow img {
+/* Image */
+.container img {
     width: 100%;
     border-radius: 20px;
+    margin-bottom: 10px;
 }
 
-/* Typing text */
-#typing {
+/* Title */
+h1 {
+    color: #ff69b4;
+    margin: 10px 0;
+}
+
+/* Text */
+p {
     font-size: 14px;
-    margin-top: 10px;
-    color: #ccc;
+    color: #555;
 }
 
-/* Days counter */
-.counter {
+/* Button */
+button {
+    background: #ff85a2;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    color: white;
     margin-top: 10px;
-    font-size: 13px;
-    color: #aaa;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #ff5c8a;
+}
+
+/* Hidden message */
+.hidden {
+    display: none;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* Hearts floating */
+.heart {
+    position: fixed;
+    bottom: -10px;
+    font-size: 20px;
+    animation: float 4s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+/* Gallery */
+.gallery img {
+    width: 70px;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+/* Footer */
+footer {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #999;
 }
 </style>
-
 </head>
+
 <body>
 
-<!-- PASSWORD LOCK -->
-<div id="lockScreen">
-    <h2>Enter Password 💖</h2>
-    <input type="password" id="pass">
-    <br><br>
-    <button onclick="unlock()">Open</button>
-</div>
+<div class="container">
 
-<!-- MAIN CONTENT -->
-<div class="container" id="mainContent">
+    <!-- MAIN PHOTO -->
+    <img src="pic1.jpg" alt="My Love">
 
-    <!-- MUSIC -->
-    <audio autoplay loop>
-        <!-- Replace with your music file -->
+    <h1>Hi Baby 🌸</h1>
+
+    <p>
+        Ikaw yung pinaka maganda kong nangyari 💖  
+        Thank you for loving me kahit makulit ako minsan 🥺
+    </p>
+
+    <!-- BUTTON -->
+    <button onclick="showLove()">Click me 💕</button>
+
+    <!-- SECRET MESSAGE -->
+    <div id="message" class="hidden">
+        I love you so much ❤️  
+        Ikaw at ikaw pa rin pipiliin ko araw-araw 💖
+    </div>
+
+    <!-- GALLERY -->
+    <div class="gallery">
+        <img src="pic1.jpg">
+        <img src="pic2.jpg">
+        <img src="pic3.jpg">
+    </div>
+
+    <!-- MUSIC BUTTON -->
+    <button onclick="playMusic()">Play Music 🎵</button>
+
+    <audio id="bgmusic" loop>
         <source src="music.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- SLIDESHOW -->
-    <div class="slideshow">
-        <img id="slide" src="my_picure.png">
-    </div>
-
-    <h2>Hi Baby ❤️</h2>
-
-    <!-- TYPING MESSAGE -->
-    <div id="typing"></div>
-
-    <!-- DAYS COUNTER -->
-    <div class="counter" id="days"></div>
+    <footer>Made with love 💌</footer>
 
 </div>
+
 <script>
-// PASSWORD
-function unlock() {
-    let password = document.getElementById("pass").value;
+function showLove() {
+    document.getElementById("message").style.display = "block";
 
-    if (password === "013019") { // CHANGE PASSWORD HERE
-        document.getElementById("lockScreen").style.display = "none";
-        document.getElementById("mainContent").style.display = "block";
-        startTyping();
-        startDays();
-    } else {
-        alert("Wrong password 😢");
+    for (let i = 0; i < 10; i++) {
+        let heart = document.createElement("div");
+        heart.innerHTML = "💖";
+        heart.classList.add("heart");
+        heart.style.left = Math.random() * 100 + "vw";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 4000);
     }
 }
 
-// SLIDESHOW
-let images = ["my_picure.png", "pic2.jpg", "pic3.jpg"];
-let index = 0;
-
-setInterval(() => {
-    index = (index + 1) % images.length;
-    document.getElementById("slide").src = images[index];
-}, 3000);
-
-// TYPING EFFECT
-let text = "I love you so much ❤️ Thank you for staying kahit mahirap ako mahalin minsan 🥺";
-let i = 0;
-
-function startTyping() {
-    let speed = 50;
-    function type() {
-        if (i < text.length) {
-            document.getElementById("typing").innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
-    type();
-}
-
-// DAYS COUNTER
-function startDays() {
-    let startDate = new Date("2023-01-01"); // CHANGE THIS DATE
-    let today = new Date();
-
-    let diff = today - startDate;
-    let days = Math.floor(diff / (1000 * 60 * 60 * 24));
-
-    document.getElementById("days").innerHTML =
-        "We've been together for " + days + " days ❤️";
+function playMusic() {
+    document.getElementById("bgmusic").play();
 }
 </script>
+
 </body>
 </html>

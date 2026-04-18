@@ -3,137 +3,158 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Babyy❤️</title>
+<title>For My Love ❤️</title>
 
 <style>
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: -apple-system, sans-serif;
     background: #0f0f0f;
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    height: 100vh;
 }
 
-/* Card */
+/* Login Screen */
+#lockScreen {
+    text-align: center;
+}
+
+input {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    margin-top: 10px;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    background: #ff4b5c;
+    color: white;
+    cursor: pointer;
+}
+
+/* Main Card */
 .container {
+    display: none;
     width: 90%;
     max-width: 350px;
     background: #1c1c1e;
     border-radius: 25px;
     padding: 20px;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
 }
 
-/* Image */
-.container img {
+/* Slideshow */
+.slideshow img {
     width: 100%;
     border-radius: 20px;
 }
 
-/* Title */
-h1 {
-    color: #ff4b5c;
-}
-
-/* Button */
-button {
-    background: #ff4b5c;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 20px;
-    color: white;
-    font-size: 16px;
+/* Typing text */
+#typing {
+    font-size: 14px;
     margin-top: 10px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-button:hover {
-    background: #ff2e44;
-}
-
-/* Hidden message */
-.hidden {
-    display: none;
-    margin-top: 15px;
-    font-size: 14px;
-}
-
-/* Hearts animation */
-.heart {
-    position: fixed;
-    bottom: -10px;
-    font-size: 20px;
-    animation: float 4s linear infinite;
-}
-
-@keyframes float {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(-100vh); opacity: 0; }
-}
-
-.section {
-    margin-top: 20px;
-    text-align: left;
-    font-size: 14px;
     color: #ccc;
+}
+
+/* Days counter */
+.counter {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #aaa;
 }
 </style>
 
 </head>
 <body>
 
-<div class="container">
+<!-- PASSWORD LOCK -->
+<div id="lockScreen">
+    <h2>Enter Password 💖</h2>
+    <input type="password" id="pass">
+    <br><br>
+    <button onclick="unlock()">Open</button>
+</div>
 
-    <!-- Replace this -->
-    <img src="my_picture.jpg" alt="My Love">
+<!-- MAIN CONTENT -->
+<div class="container" id="mainContent">
 
-    <h1>Hi Baby ❤️</h1>
+    <!-- MUSIC -->
+    <audio autoplay loop>
+        <!-- Replace with your music file -->
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
 
-    <p>
-        Kahit anong mangyari, ikaw pa rin pipiliin ko araw-araw.
-    </p>
-
-    <!-- Button -->
-    <button onclick="showLove()">Click me 💖</button>
-
-    <!-- Hidden message -->
-    <div id="message" class="hidden">
-        I love you so much ❤️  
-        Thank you for staying kahit mahirap ako mahalin minsan 🥺
+    <!-- SLIDESHOW -->
+    <div class="slideshow">
+        <img id="slide" src="pic1.jpg">
     </div>
 
-    <!-- Memories -->
-    <div class="section">
-        <h3>💌 Memories</h3>
-        <p>• First chat natin 😄</p>
-        <p>• First date natin 🥺</p>
-        <p>• Lahat ng moments na kasama kita ❤️</p>
-    </div>
+    <h2>Hi Baby ❤️</h2>
+
+    <!-- TYPING MESSAGE -->
+    <div id="typing"></div>
+
+    <!-- DAYS COUNTER -->
+    <div class="counter" id="days"></div>
 
 </div>
 
 <script>
-function showLove() {
-    document.getElementById("message").style.display = "block";
+// PASSWORD
+function unlock() {
+    let password = document.getElementById("pass").value;
 
-    // create floating hearts
-    for (let i = 0; i < 10; i++) {
-        let heart = document.createElement("div");
-        heart.innerHTML = "❤️";
-        heart.classList.add("heart");
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.fontSize = (15 + Math.random() * 20) + "px";
-        document.body.appendChild(heart);
-
-        setTimeout(() => {
-            heart.remove();
-        }, 4000);
+    if (password === "iloveyou") { // CHANGE PASSWORD HERE
+        document.getElementById("lockScreen").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+        startTyping();
+        startDays();
+    } else {
+        alert("Wrong password 😢");
     }
+}
+
+// SLIDESHOW
+let images = ["pic1.jpg", "pic2.jpg", "pic3.jpg"];
+let index = 0;
+
+setInterval(() => {
+    index = (index + 1) % images.length;
+    document.getElementById("slide").src = images[index];
+}, 3000);
+
+// TYPING EFFECT
+let text = "I love you so much ❤️ Thank you for staying kahit mahirap ako mahalin minsan 🥺";
+let i = 0;
+
+function startTyping() {
+    let speed = 50;
+    function type() {
+        if (i < text.length) {
+            document.getElementById("typing").innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+        }
+    }
+    type();
+}
+
+// DAYS COUNTER
+function startDays() {
+    let startDate = new Date("2023-01-01"); // CHANGE THIS DATE
+    let today = new Date();
+
+    let diff = today - startDate;
+    let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+    document.getElementById("days").innerHTML =
+        "We've been together for " + days + " days ❤️";
 }
 </script>
 

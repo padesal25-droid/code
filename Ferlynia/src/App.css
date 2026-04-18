@@ -1,0 +1,149 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Work+Sans:wght@300;400;500;600;700&display=swap');
+
+/* Base */
+body, html {
+  min-height: 100vh;
+  font-family: 'Work Sans', sans-serif;
+  background-color: #FFF8F0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Merriweather', serif;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F5DEB3;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8B4513;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6B3410;
+}
+
+/* Selection color */
+::selection {
+  background-color: #FFB347;
+  color: #2C1810;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.slide-in-left {
+  animation: slideInLeft 0.5s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.slide-in-right {
+  animation: slideInRight 0.5s ease-out;
+}
+
+/* Buttons (Bootstrap override) */
+.btn-custom {
+  transition: all 0.3s ease;
+  font-weight: 600;
+  border-radius: 2rem;
+}
+.btn-custom:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(139, 69, 19, 0.2);
+}
+
+/* Cards (Bootstrap override) */
+.card-custom {
+  border: none;
+  border-radius: 1.5rem;
+  transition: all 0.3s ease;
+}
+.card-custom:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(139, 69, 19, 0.2);
+}
+
+/* Images */
+.card-custom img {
+  transition: transform 0.5s ease, opacity 0.3s ease;
+}
+.card-custom img:hover {
+  transform: scale(1.1);
+}
+
+/* Focus styles for accessibility */
+button:focus,
+a:focus,
+input:focus,
+textarea:focus {
+  outline: 2px solid #FFB347;
+  outline-offset: 2px;
+}
+
+/* Lazy loaded images */
+img[loading="lazy"] {
+  opacity: 0;
+}
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* Custom Colors for Bootstrap utilities */
+.text-primary { color: #8B4513 !important; }
+.bg-primary { background-color: #8B4513 !important; }
+.text-secondary { color: #6B4423 !important; }
+.bg-secondary { background-color: #FFF8F0 !important; }
+.text-accent { color: #FFB347 !important; }
+.bg-accent { background-color: #FFB347 !important; }
+.text-accent-dark { color: #2C1810 !important; }
+.bg-accent-dark { background-color: #2C1810 !important; }
